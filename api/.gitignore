@@ -1,0 +1,8 @@
+# Environment files
+.env
+
+# Node module packages
+*/node_modules
+
+# misc
+/.DS_Store
