@@ -44,11 +44,11 @@ export const getHotel = async (req, res, next) => {
 };
 
 export const getAllHotel = async (req, res, next) => {
-  const failed = true;
+  // const failed = true;
 
-  if (failed) {
-    return next(createError(401, 'You are not authenticated!'));
-  }
+  // if (failed) {
+  //   return next(createError(401, 'You are not authenticated!'));
+  // }
   try {
     const hotels = await Hotel.find();
     res.status(200).json(hotels);

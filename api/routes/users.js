@@ -4,12 +4,8 @@ import {
   getAllUser,
   getUser,
   updateUser,
-} from '../controllers/UserController.js';
-import {
-  verifyAdmin,
-  verifyToken,
-  verifyUser,
-} from '../utils/verifyToken.js';
+} from '../controllers/userController.js';
+import { verifyAdmin, verifyUser } from '../utils/verifyToken.js';
 
 const router = express.Router();
 
