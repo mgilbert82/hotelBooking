@@ -1,111 +1,106 @@
 const Footer = () => {
+  const places = [
+    { title: "Countries" },
+    { title: "Regions" },
+    { title: "Cities" },
+    { title: "Districts" },
+    { title: "Airports" },
+    { title: "Hotels" },
+    { title: "Place of interest" },
+  ];
+  const housings = [
+    { title: "Homes" },
+    { title: "Apartments" },
+    { title: "Resorts" },
+    { title: "Villas" },
+    { title: "Hostels" },
+    { title: "B&Bs" },
+    { title: "Guest Houses" },
+  ];
+  const categories = [
+    { title: "Unique place to stay" },
+    { title: "All destinations" },
+    { title: "Discover" },
+    { title: "Reviews" },
+    { title: "Unlocked Travel articles" },
+    { title: "Travel communities" },
+    { title: "Seasonal and holidays deals" },
+  ];
+  const services = [
+    { title: "Car rental" },
+    { title: "Flight finder" },
+    { title: "Restaurant reservation" },
+    { title: "HotelBooking.com for Travel Agents" },
+  ];
+  const resources = [
+    { title: "Coronavirus (COVID-19) FAQs" },
+    { title: "About hotelBooking.com" },
+    { title: "Customer Service Help" },
+    { title: "HotelBooking.com for Travel Agents" },
+    { title: "Partner Help" },
+    { title: "Careers" },
+    { title: "Sustainability" },
+    { title: "Press center" },
+    { title: "Safety Resource center" },
+  ];
+
   return (
-    <div className="flex items-center gap-2 text-xs flex-col pt-4">
-      <div className="flex justify-between gap-4 m-4 max-w-screen-xl w-full">
-        <ul className="">
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Countries
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Régions
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Cities
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Districts
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Airports
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Hotels
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Place of interest
-          </li>
+    <div className="lg:flex items-center gap-2 text-xs flex-col pt-4 p-4">
+      <div className="lg:flex justify-between gap-4 m-4 w-full">
+        {/* Places */}
+        <ul>
+          {places.map((place, id) => (
+            <li
+              className="mb-2 cursor-pointer text-blue-500"
+              key={id}
+            >
+              {place.title}
+            </li>
+          ))}
         </ul>
-        <ul className="">
-          <li className="mb-2 cursor-pointer text-blue-500">Homes</li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Apartments
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Resorts
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Villas
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Hostels
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">B&Bs</li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Guest Houses
-          </li>
+        {/* Housings */}
+        <ul>
+          {housings.map((housing, id) => (
+            <li
+              className="mb-2 cursor-pointer text-blue-500"
+              key={id}
+            >
+              {housing.title}
+            </li>
+          ))}
         </ul>
-        <ul className="">
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Unique places to stay
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            All destinations
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Discover
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Reviews
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Unoacked: Travel articles
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Travel communities
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Seasonal and holday deals
-          </li>
+        {/* Categories */}
+        <ul>
+          {categories.map((category, id) => (
+            <li
+              className="mb-2 cursor-pointer text-blue-500"
+              key={id}
+            >
+              {category.title}
+            </li>
+          ))}
         </ul>
-        <ul className="">
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Car rental
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Flight finder
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Restaurant reservations
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            hotelBooking.com for Travel Agents
-          </li>
+        {/* Services */}
+        <ul>
+          {services.map((service, id) => (
+            <li
+              className="mb-2 cursor-pointer text-blue-500"
+              key={id}
+            >
+              {service.title}
+            </li>
+          ))}
         </ul>
-        <ul className="">
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Coronavirus (COVID-19) FAQs
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            about hotelBooking.com
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Customer Service Help
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Partner Help
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Careers
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Sustainability
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Press center
-          </li>
-          <li className="mb-2 cursor-pointer text-blue-500">
-            Safety Resource center
-          </li>
+        {/* Resources */}
+        <ul>
+          {resources.map((resource, id) => (
+            <li
+              className="mb-2 cursor-pointer text-blue-500"
+              key={id}
+            >
+              {resource.title}
+            </li>
+          ))}
         </ul>
       </div>
       <div className="text-center my-4">

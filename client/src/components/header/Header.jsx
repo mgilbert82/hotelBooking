@@ -50,14 +50,14 @@ const Header = ({ type }) => {
   };
 
   return (
-    <div className="flex justify-center bg-blue-400 text-white">
+    <div className="flex justify-center bg-blue-400 text-white sm:p-4">
       <div
         className={`mt-5 w-full max-w-screen-xl relative ${
           type == "hotel" ? "mb-4" : "mb-10"
         }`}
       >
         {/* Buttons */}
-        <div className="flex gap-6 text-lg pb-5">
+        <div className="lg:flex gap-6 text-lg pb-5 m-6 lg:m-0">
           <div className="flex items-center gap-2">
             <FontAwesomeIcon icon={faBed} />
             <span>Stays</span>
@@ -81,7 +81,7 @@ const Header = ({ type }) => {
         </div>
 
         {type !== "hotel" && (
-          <>
+          <div className="lg:m-0 m-4">
             {/* Title */}
             <h1 className="text-yellow-300 font-bold text-5xl">
               Best offers 2023 summer ☀️
@@ -92,17 +92,18 @@ const Header = ({ type }) => {
               opportunity to have fun, relax and create new memories.
             </p>
             {/* Call to action */}
-            <button className="bg-pink-500 p-2 rounded-lg my-6">
+            <button className="bg-pink-500 p-2 rounded-lg my-6 w-full lg:w-auto">
               Sign in / Register{" "}
             </button>
+
             {/* Parameter section */}
             <div
-              className="flex justify-around
-            align-center border-2 border-yellow-300 bg-white rounded-lg px-2 py-4 gap-2 absolute -bottom-50 w-full
-            max-w-screen-xl"
+              className="lg:flex justify-around
+            align-center border-2 border-yellow-300 bg-white rounded-lg px-2 py-4 gap-2 lg:absolute -bottom-50 w-full
+            max-w-screen-xl p-4"
             >
               {/* Search section */}
-              <div className="flex items-center bg-gray-200 p-2 rounded-lg text-blue-500">
+              <div className="flex items-center bg-gray-200 p-2 rounded-lg text-blue-500 m-2 lg:m-0">
                 <FontAwesomeIcon
                   icon={faSearch}
                   className="me-2 text-blue-500"
@@ -117,7 +118,7 @@ const Header = ({ type }) => {
               {/* End of search section */}
 
               {/* Calendar section */}
-              <div className="bg-gray-200 p-2 rounded-lg text-blue-500 flex items-center z-10">
+              <div className="bg-gray-200 p-2 rounded-lg text-blue-500 flex items-center z-10 m-2 lg:m-0">
                 <FontAwesomeIcon
                   icon={faCalendar}
                   className="me-2 text-blue-500"
@@ -140,14 +141,14 @@ const Header = ({ type }) => {
                     moveRangeOnFirstSelection={false}
                     ranges={date}
                     minDate={new Date()}
-                    className="absolute top-20"
+                    className="lg:absolute lg:top-20"
                   />
                 )}
               </div>
               {/* End of calendar section */}
 
               {/* Person section */}
-              <div className="bg-gray-200 p-2 rounded-lg text-blue-500 cursor-pointer z-10">
+              <div className="bg-gray-200 p-2 rounded-lg text-blue-500 cursor-pointer z-10 m-2 lg:m-0">
                 <FontAwesomeIcon
                   icon={faPerson}
                   className="me-2 text-blue-500"
@@ -242,7 +243,7 @@ const Header = ({ type }) => {
               {/* End of person section */}
 
               {/* Button section */}
-              <div className="flex items-center">
+              <div className="flex items-center justify-end m-2">
                 <button
                   className="bg-pink-500 text-white p-1 px-4 rounded-md"
                   onClick={handleSearch}
@@ -251,7 +252,7 @@ const Header = ({ type }) => {
                 </button>
               </div>
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>
