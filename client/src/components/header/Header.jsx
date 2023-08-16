@@ -259,8 +259,8 @@ const Header = ({ type }) => {
   );
 };
 
-Header.propTypes = {
-  type: String,
-};
+// Header.propTypes = {
+//   type: String,
+// };
 
 export default Header;
