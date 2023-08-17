@@ -1,3 +1,4 @@
+import useFetch from "../../hooks/useFetch";
 const PropertyList = () => {
   const properties = [
     {
@@ -26,10 +27,42 @@ const PropertyList = () => {
       number: 1241,
     },
   ];
+
+  const { data, loading, error } = useFetch(
+    "/api/hotels/countByType"
+  );
   return (
     <div className="w-full max-w-screen-xl md:flex justify-between gap-6 p-4">
       {/* Property */}
-      {properties.map((property, i) => (
+      {loading ? (
+        "Loading is running..."
+      ) : (
+        <>
+          {data &&
+            properties.map((img, id) => (
+              <div
+                className="rounded-xl overflow-hidden cursor-pointer flex-1"
+                key={id}
+              >
+                <img
+                  src={img.src}
+                  alt=""
+                  className="w-full h-50 object-cover"
+                />
+                <div className="lg:my-0 my-4">
+                  <h1 className="text-center lg:text-left first-letter:uppercase">
+                    {data[id]?.type}
+                  </h1>
+                  <h2 className="text-center lg:text-left">
+                    {data[id]?.count} {data[id]?.type}
+                  </h2>
+                </div>
+              </div>
+            ))}
+        </>
+      )}
+
+      {/* {properties.map((property, i) => (
         <div
           className="rounded-xl overflow-hidden cursor-pointer flex-1"
           key={i}
@@ -48,7 +81,7 @@ const PropertyList = () => {
             </h2>
           </div>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 };
