@@ -1,5 +1,4 @@
-import Hotel from '../models/Hotel.js';
-import { createError } from '../utils/error.js';
+import Hotel from "../models/Hotel.js";
 
 export const createHotel = async (req, res, next) => {
   const newHotel = new Hotel(req.body);
@@ -28,7 +27,7 @@ export const updateHotel = async (req, res, next) => {
 export const deleteHotel = async (req, res, next) => {
   try {
     await Hotel.findByIdAndDelete(req.params.id);
-    res.status(200).json('Hotel has been deleted');
+    res.status(200).json("Hotel has been deleted");
   } catch (err) {
     next(err);
   }
@@ -58,7 +57,7 @@ export const getAllHotel = async (req, res, next) => {
 };
 
 export const countByCity = async (req, res, next) => {
-  const cities = req.query.cities.split(',');
+  const cities = req.query.cities.split(",");
 
   try {
     const list = await Promise.all(
@@ -74,8 +73,24 @@ export const countByCity = async (req, res, next) => {
 
 export const countByType = async (req, res, next) => {
   try {
-    const hotels = await Hotel.find();
-    res.status(200).json(hotels);
+    // const cities = req.query.cities.split(",");
+    const hotelCount = await Hotel.countDocuments({ type: "hotel" });
+    const apartmentCount = await Hotel.countDocuments({
+      type: "apartment",
+    });
+    const resortCount = await Hotel.countDocuments({
+      type: "resort",
+    });
+    const villaCount = await Hotel.countDocuments({ type: "villa" });
+    const cabinCount = await Hotel.countDocuments({ type: "cabin" });
+
+    res.status(200).json([
+      { type: "hotels", count: hotelCount },
+      { type: "apartments", count: apartmentCount },
+      { type: "resorts", count: resortCount },
+      { type: "villas", count: villaCount },
+      { type: "cabins", count: cabinCount },
+    ]);
   } catch (err) {
     next(err);
   }
