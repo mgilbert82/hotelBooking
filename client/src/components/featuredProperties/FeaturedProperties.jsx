@@ -1,3 +1,5 @@
+import useFetch from "../../hooks/useFetch";
+
 const FeaturedProperties = () => {
   const guestLoves = [
     {
@@ -33,37 +35,45 @@ const FeaturedProperties = () => {
       ratingText: "Excellent",
     },
   ];
+
+  const { data, loading, error } = useFetch(
+    "/api/hotels?featured=true"
+  );
+  console.log(data);
   return (
     <div className="w-full max-w-screen-xl md:flex justify-between gap-6">
-      {guestLoves.map((guestLove, id) => (
-        <div
-          className="rounded-xl overflow-hidden cursor-pointer flex-1 gap-2 flex flex-col m-4"
-          key={id}
-        >
-          <img
-            src={guestLove.src}
-            alt=""
-            className="w-full h-50 object-cover"
-          />
-          <span className="text-lg font-semibold">
-            {guestLove.title}
-          </span>
-          <span className="text-lg font-medium">
-            {guestLove.destination}
-          </span>
-          <span className="text-lg font-light">
-            Starting from ${guestLove.price}
-          </span>
-          <div className="flex items-center gap-2 ">
-            <button className="rounded-3xl text-white bg-pink-600 p-1 text-xs border-2 border-pink-600">
-              {guestLove.rating}
-            </button>
-            <span className="text-sm font-normal">
-              {guestLove.ratingText}
-            </span>
-          </div>
-        </div>
-      ))}
+      {loading
+        ? "Loading in progress..."
+        : data &&
+          guestLoves.map((guestLove, id) => (
+            <div
+              className="rounded-xl overflow-hidden cursor-pointer flex-1 gap-2 flex flex-col m-4"
+              key={id}
+            >
+              <img
+                src={guestLove.src}
+                alt=""
+                className="w-full h-50 object-cover"
+              />
+              <span className="text-lg font-semibold">
+                {data[id]?.name}
+              </span>
+              <span className="text-lg font-medium">
+                {data[id]?.city}
+              </span>
+              <span className="text-lg font-light">
+                Starting from ${data[id]?.cheapestPrice}
+              </span>
+              <div className="flex items-center gap-2 ">
+                <button className="rounded-3xl text-white bg-pink-600 p-1 text-xs border-2 border-pink-600">
+                  {guestLove.rating}
+                </button>
+                <span className="text-sm font-normal">
+                  {guestLove.ratingText}
+                </span>
+              </div>
+            </div>
+          ))}
     </div>
   );
 };
