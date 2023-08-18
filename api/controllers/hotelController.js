@@ -48,8 +48,13 @@ export const getAllHotel = async (req, res, next) => {
   // if (failed) {
   //   return next(createError(401, 'You are not authenticated!'));
   // }
+
+  const { min, max, ...others } = req.query;
   try {
-    const hotels = await Hotel.find();
+    const hotels = await Hotel.find({
+      ...others,
+      cheapestPrice: { $gt: min | 1, $lt: max | 999 },
+    }).limit(4);
     res.status(200).json(hotels);
   } catch (err) {
     next(err);
