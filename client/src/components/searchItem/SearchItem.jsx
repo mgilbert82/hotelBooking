@@ -1,5 +1,7 @@
-const SearchItem = () => {
-  const results = [
+import { Link } from "react-router-dom";
+
+const SearchItem = ({ item }) => {
+  const items = [
     {
       src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
       title: "Best Hotel in country",
@@ -46,66 +48,64 @@ const SearchItem = () => {
       ratingText: "Excellent",
     },
   ];
+
   return (
     <>
-      {results.map((result, id) => (
-        <div
-          className="border-2 border-gray-200 lg:flex justify-between gap-4 rounded-md p-4 mt-4"
-          key={id}
-        >
-          <img
-            src={result.src}
-            alt=""
-            className="lg:w-60 h-80 object-cover rounded-md"
-          />
-          <div className="flex flex-1 flex-col justify-between">
-            <h1 className="text-pink-600 text-3xl lg:my-0 my-4 text-center lg:text-left">
-              {result.title}
-            </h1>
-            <span className="text-sm text-blue-500 my-2 lg:my-0">
-              {result.distance}m from center
-            </span>
-            <span className="bg-yellow-300 p-2 rounded-md text-blue-600 lg:w-1/2 text-center my-2 lg:my-0">
-              {result.freeOptions}
-            </span>
-            <span className="text-black font-bold my-2 lg:my-0">
-              {result.hotelOptions}
-            </span>
-            <span className="my-2 lg:my-0">
-              {result.hotelDetails}
-            </span>
-            <span className="text-blue-600 font-semibold">
-              Free cancellation
-            </span>
-            <p className="text-blue-600 font-light text-sm">
-              You can cancel later, so lock in this great price today!
-            </p>
-          </div>
-          <div className="lg:flex flex-2 mt-4 lg:mt-0">
-            <div className="flex flex-col justify-between">
+      <div className="border-2 border-gray-200 lg:flex justify-between gap-4 rounded-md p-4 mt-4">
+        <img
+          src={item.photo}
+          alt=""
+          className="lg:w-60 h-80 object-cover rounded-md"
+        />
+        <div className="flex flex-1 flex-col justify-between">
+          <h1 className="text-pink-600 text-3xl lg:my-0 my-4 text-center lg:text-left">
+            {item.name}
+          </h1>
+          <span className="text-sm text-blue-500 my-2 lg:my-0">
+            {item.distance}m from center
+          </span>
+          <span className="bg-yellow-300 p-2 rounded-md text-blue-600 lg:w-1/2 text-center my-2 lg:my-0">
+            Free airport hotel travel
+          </span>
+          <span className="text-black font-bold my-2 lg:my-0">
+            Studio Apartment with Air conditioning
+          </span>
+          <span className="my-2 lg:my-0">{item.desc}</span>
+          <span className="text-blue-600 font-semibold">
+            Free cancellation
+          </span>
+          <p className="text-blue-600 font-light text-sm">
+            You can cancel later, so lock in this great price today!
+          </p>
+        </div>
+        <div className="lg:flex flex-2 mt-4 lg:mt-0">
+          <div className="flex flex-col justify-between">
+            {item.rating && (
               <div className="flex justify-between">
                 <span className="font-semibold text-md">
-                  {result.ratingText}
+                  {item.ratingText}
                 </span>
                 <button className="bg-pink-600 text-white rounded-full p-1 text-sm">
-                  {result.rating}
+                  {item.rating}
                 </button>
               </div>
-              <div className="flex flex-col text-right gap-2 mt-4 lg:mt-0">
-                <span className="text-3xl font-bold text-blue-500">
-                  ${result.price}
-                </span>
-                <span className="text-sm text-gray-400">
-                  Includes taxes and fees
-                </span>
+            )}
+            <div className="flex flex-col text-right gap-2 mt-4 lg:mt-0">
+              <span className="text-3xl font-bold text-blue-500">
+                ${item.cheapestPrice}
+              </span>
+              <span className="text-sm text-gray-400">
+                Includes taxes and fees
+              </span>
+              <Link to={`/hotel/${item._id}`}>
                 <button className="bg-blue-500 text-white p-2 rounded-md cursor-pointer">
                   See availability
                 </button>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
-      ))}
+      </div>
     </>
   );
 };
