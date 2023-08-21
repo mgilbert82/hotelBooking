@@ -5,17 +5,30 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
+import useFetch from "../../hooks/useFetch";
 
 const Hotels = () => {
   const location = useLocation();
-  console.log(location);
+  //console.log(location);
   const [destination, setDestination] = useState(
     location.state.destination
   );
-  const [date, setDate] = useState(location.state.date);
+  const [dates, setDates] = useState(location.state.dates);
   const [openDate, setOpenDate] = useState(false);
   const [options, setOptions] = useState(location.state.options);
 
+  //min and max variable
+  const [min, setMin] = useState(undefined);
+  const [max, setMax] = useState(undefined);
+
+  const { data, loading, error, reFetch } = useFetch(
+    `/api/hotels?city=${destination}&min=${min}&max=${max}`
+  );
+
+  //Handle button
+  const handleClick = () => {
+    reFetch();
+  };
   return (
     <div>
       <Navbar />
@@ -45,15 +58,15 @@ const Hotels = () => {
                   className="flex items-center bg-white rounded-sm placeholder:py-2 font-light text-md text-gray-400 p-2 cursor-pointer focus:outline-none"
                 >
                   {`${format(
-                    date[0].startDate,
+                    dates[0].startDate,
                     "MM/dd/yyyy"
-                  )} to ${format(date[0].endDate, "MM/dd/yyyy")}`}
+                  )} to ${format(dates[0].endDate, "MM/dd/yyyy")}`}
                 </span>
                 {openDate && (
                   <DateRange
-                    onChange={(item) => setDate([item.selection])}
+                    onChange={(item) => setDates([item.selection])}
                     minDate={new Date()}
-                    ranges={date}
+                    ranges={dates}
                     className="rounded-sm"
                   />
                 )}
@@ -67,6 +80,7 @@ const Hotels = () => {
                   type="number"
                   className="flex items-center bg-white rounded-sm font-light text-md text-gray-400
                   p-2 cursor-pointer focus:outline-none"
+                  onChange={(e) => setMin(e.target.value)}
                 />
               </div>
               {/* Max Price Choice */}
@@ -78,6 +92,7 @@ const Hotels = () => {
                   type="number"
                   className="flex items-center bg-white rounded-sm font-light text-md text-gray-400
                   p-2 cursor-pointer focus:outline-none"
+                  onChange={(e) => setMax(e.target.value)}
                 />
               </div>
               {/* Adult choices */}
@@ -115,14 +130,25 @@ const Hotels = () => {
                 />
               </div>
             </div>
-            <button className="w-80 bg-yellow-400 m-4 p-2 rounded-md text-white">
+            <button
+              className="w-80 bg-yellow-400 m-4 p-2 rounded-md text-white"
+              onClick={handleClick}
+            >
               Search
             </button>
           </div>
           {/* Search Result */}
           <div className="flex-1 lg:mt-0 mt-4">
             <h1>List Result</h1>
-            <SearchItem />
+            {loading ? (
+              "Loading in progress..."
+            ) : (
+              <>
+                {data.map((item) => (
+                  <SearchItem item={item} key={item._id} />
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>
