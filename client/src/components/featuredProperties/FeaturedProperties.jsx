@@ -39,39 +39,39 @@ const FeaturedProperties = () => {
   const { data, loading, error } = useFetch(
     "/api/hotels?featured=true"
   );
-  console.log(data);
+
+  //console.log(data);
   return (
     <div className="w-full max-w-screen-xl md:flex justify-between gap-6">
       {loading
         ? "Loading in progress..."
-        : data &&
-          guestLoves.map((guestLove, id) => (
+        : data.map((item) => (
             <div
               className="rounded-xl overflow-hidden cursor-pointer flex-1 gap-2 flex flex-col m-4"
-              key={id}
+              key={item._id}
             >
               <img
-                src={guestLove.src}
+                src={item.photos[0]}
                 alt=""
                 className="w-full h-50 object-cover"
               />
               <span className="text-lg font-semibold">
-                {data[id]?.name}
+                {item.name}
               </span>
-              <span className="text-lg font-medium">
-                {data[id]?.city}
-              </span>
+              <span className="text-lg font-medium">{item.city}</span>
               <span className="text-lg font-light">
-                Starting from ${data[id]?.cheapestPrice}
+                Starting from ${item.cheapestPrice}
               </span>
-              <div className="flex items-center gap-2 ">
-                <button className="rounded-3xl text-white bg-pink-600 p-1 text-xs border-2 border-pink-600">
-                  {guestLove.rating}
-                </button>
-                <span className="text-sm font-normal">
-                  {guestLove.ratingText}
-                </span>
-              </div>
+              {item.rating && (
+                <div className="flex items-center gap-2 ">
+                  <button className="rounded-3xl text-white bg-pink-600 p-1 text-xs border-2 border-pink-600">
+                    {item.ratingNumber}
+                  </button>
+                  <span className="text-sm font-normal">
+                    {item.ratingText}
+                  </span>
+                </div>
+              )}
             </div>
           ))}
     </div>
